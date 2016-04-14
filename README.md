@@ -114,7 +114,7 @@ course only if you need/want to run tests.
 
 # License
 
-[MIT](/LICENCE)
+[MIT](LICENCE)
 
 ----
 Documentation was tested using [dillinger.io](http://dillinger.io/).
