@@ -1,0 +1,7 @@
+This is a activities related to the project, which may be done some day.
+First column gives estimation in pomodoros/invested pomodoros ("-" if not
+started yet).
+
+8/- make a on separate HW, maybe soldering instead of sticking wires.
+6/- cmake for whole build process - replacing ino
+4/- connect it to bananapi
