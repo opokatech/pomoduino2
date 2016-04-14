@@ -35,8 +35,6 @@ far.
 
 The pomodoros are stored in eeprom and thus survive power off.
 
-## Logic - diagram
-
 On a diagram it looks like so:
 
 ![state diagram of pomoduino2 timer](/doc/images/pomoduino2_state_diagram.png?raw=true "State diagram").
