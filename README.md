@@ -113,12 +113,10 @@ used both as submodules (they are in `/modules` directory). It matters of
 course only if you need/want to run tests.
 
 # License
+
+[MIT](/LICENCE)
+
 ----
-
-[MIT][/LICENCE]
-
-# This
-
 Documentation was tested using [dillinger.io](http://dillinger.io/).
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
