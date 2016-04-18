@@ -55,6 +55,9 @@ namespace MO
             /// Called once.
             void Setup();
 
+            /// Allows setting up a_char with given dot matrix of size 8.
+            void Setup_Char(uint8_t a_char, uint8_t *a_matrix);
+
             /// Writes a string at (a_x, a_y) location.
             void Write(uint8_t a_x, uint8_t a_y, const char *a_format, ...);
 

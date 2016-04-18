@@ -51,7 +51,9 @@ namespace MO
 
             enum
             {
-                PIN_BEEP = 8
+                PIN_BEEP = 8,
+                CHAR_POM = 1,       //!< Character for pomodoro.
+                CHAR_SQUARE = 255   //!< Character for filled square.
             };
 
             uint8_t the_timer;

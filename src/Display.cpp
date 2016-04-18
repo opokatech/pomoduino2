@@ -43,6 +43,13 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
+    void Display::Setup_Char(uint8_t a_char, uint8_t *a_matrix)
+    {
+        the_lcd.createChar(a_char, a_matrix);
+    }
+
+    // -------------------------------------------------------------------------
+
     void Display::Write(uint8_t a_x, uint8_t a_y, const char *a_format, ...)
     {
         va_list vl;

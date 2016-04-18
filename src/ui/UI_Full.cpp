@@ -34,8 +34,9 @@ namespace MO
 
     void UI_Full::Show_Ready(const State_IF &a_state)
     {
-        the_display.Write(0, "P%02u READY    #%02u",
+        the_display.Write(0, "P%02u READY    %c%02u",
                           a_state.Get_Current_Period_Minutes(),
+                          char(CHAR_POM),
                           a_state.Get_Pomodoros());
 
         create_progress(a_state);
@@ -47,9 +48,10 @@ namespace MO
     void UI_Full::Show_Running(const State_IF &a_state)
     {
         uint8_t pom = a_state.Get_Pomodoros();
-        the_display.Write(0, "P%02u %5s    #%02u",
+        the_display.Write(0, "P%02u %5s    %c%02u",
                           a_state.Get_Current_Period_Minutes(),
                           Utils::ms_to_m_s(a_state.Get_Time_Left_Ms()),
+                          char(CHAR_POM),
                           pom);
         create_progress(a_state);
 
@@ -69,16 +71,18 @@ namespace MO
         // alternate those 2 lines
         if (the_timer < 5)
         {
-            the_display.Write(0, "P%02u %5s    #%02u",
+            the_display.Write(0, "P%02u %5s    %c%02u",
                               a_state.Get_Current_Period_Minutes(),
                               Utils::ms_to_m_s(a_state.Get_Time_Left_Ms()),
+                              char(CHAR_POM),
                               pom);
         }
         else
         {
-            the_display.Write(0, "P%02u %5s    #%02u",
+            the_display.Write(0, "P%02u %5s    %c%02u",
                               a_state.Get_Current_Period_Minutes(),
                               "",
+                              char(CHAR_POM),
                               pom);
         }
 
@@ -128,6 +132,20 @@ namespace MO
 
     void UI_Full::Setup()
     {
+        uint8_t pomodoro[8] =
+		{
+		  B10000,
+		  B01010,
+		  B00100,
+		  B01110,
+		  B11111,
+		  B11111,
+		  B11111,
+		  B01110,
+        };
+
+        the_display.Setup_Char(CHAR_POM, pomodoro);
+
         the_display.Setup();
         the_beeper.Setup();
     }
@@ -141,7 +159,7 @@ namespace MO
         for (pos = 0; pos < a_state.Get_Pomodoros() &&
                       pos < Display::MAX_CHARS; ++pos)
         {
-            the_progress[pos] = 255; // filled square
+            the_progress[pos] = CHAR_POM;
         }
     }
 }
