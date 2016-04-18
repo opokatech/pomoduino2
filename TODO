@@ -5,5 +5,3 @@ started yet).
 8/- make a on separate HW, maybe soldering instead of sticking wires.
 6/- cmake for whole build process - replacing ino
 4/- connect it to bananapi
-2/- pressing longer B1 in ready state could switch between long
-    (50m-5m-15m) and normal (25m-5m-15m) mode. 
