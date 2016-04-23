@@ -31,6 +31,7 @@ namespace MO
     {
         const uint8_t PIN_B1                = 9;  // button 1
         const uint8_t PIN_B2                = 10; // button 2
+        const uint8_t PIN_BEEPER            = 8;  // beeper
 
         // display
         const uint8_t PIN_RS                = 12;

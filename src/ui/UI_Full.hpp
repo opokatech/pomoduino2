@@ -51,7 +51,6 @@ namespace MO
 
             enum
             {
-                PIN_BEEP = 8,
                 CHAR_POM = 1,       //!< Character for pomodoro.
                 CHAR_SQUARE = 255   //!< Character for filled square.
             };

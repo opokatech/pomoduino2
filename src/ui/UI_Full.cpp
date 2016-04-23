@@ -22,10 +22,11 @@ SOFTWARE.
 
 #include "UI_Full.hpp"
 #include "Utils.hpp"
+#include "Const.hpp"
 
 namespace MO
 {
-    UI_Full::UI_Full(): the_timer(0), the_beeper(PIN_BEEP, 1)
+    UI_Full::UI_Full(): the_timer(0), the_beeper(Const::PIN_BEEPER, 1)
     {
 
     }
