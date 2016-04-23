@@ -6,6 +6,10 @@ lcd display, 2 buttons and a buzzer.
 It keeps track of finished pomodoros (saves them to non-volatile memory) and
 counts them up. The logic is described below.
 
+A prototype looks like this:
+
+![pomoduino2 proto](/doc/images/pomoduino2_proto.jpg?raw=true "Pomoduino2 prototype").
+
 
 # Logic - description
 
@@ -63,6 +67,8 @@ The components were connected as depicted below:
 - 2 buttons
 - buzzer - although, again, it can be replaced by any device controller by
   digital output, for example a LED.
+
+
 
 ## Software
 
