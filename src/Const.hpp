@@ -29,17 +29,17 @@ namespace MO
 {
     namespace Const
     {
-        const uint8_t PIN_B1                = 9;  // button 1
-        const uint8_t PIN_B2                = 10; // button 2
-        const uint8_t PIN_BEEPER            = 8;  // beeper
+        const uint8_t PIN_BEEPER            = 2;  // beeper
+        const uint8_t PIN_B1                = 3;  // button 1
+        const uint8_t PIN_B2                = 4;  // button 2
 
         // display
-        const uint8_t PIN_RS                = 12;
-        const uint8_t PIN_ENABLE            = 11;
-        const uint8_t PIN_D0                = 5;
-        const uint8_t PIN_D1                = 4;
-        const uint8_t PIN_D2                = 3;
-        const uint8_t PIN_D3                = 2;
+        const uint8_t PIN_RS                = 8;
+        const uint8_t PIN_ENABLE            = 9;
+        const uint8_t PIN_D4                = 10;
+        const uint8_t PIN_D5                = 11;
+        const uint8_t PIN_D6                = 12;
+        const uint8_t PIN_D7                = 13;
 
         // pomodoro constants
         const uint8_t POM_WORK_MIN          = 25;

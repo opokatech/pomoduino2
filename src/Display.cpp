@@ -28,7 +28,7 @@ namespace MO
 {
     Display::Display():
         the_lcd(Const::PIN_RS, Const::PIN_ENABLE,
-                Const::PIN_D0, Const::PIN_D1, Const::PIN_D2, Const::PIN_D3)
+                Const::PIN_D4, Const::PIN_D5, Const::PIN_D6, Const::PIN_D7)
     {
         for (uint8_t i = 0; i < MAX_LINES; ++i)
             memset(the_old_line[i], 0, BUF_SIZE);
