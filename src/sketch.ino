@@ -24,21 +24,12 @@ SOFTWARE.
 #include "Pomodoro.hpp"
 #include "Button.hpp"
 #include "Eeprom.hpp"
-
-// using "user interface" depending on UI_SERIAL define
-#ifdef UI_SERIAL
-#include "ui/UI_Serial.hpp"
-
-MO::UI_Serial the_ui;
-#else
-#include "ui/UI_Full.hpp"
-
-MO::UI_Full the_ui;
-#endif
+#include "ui/UI.hpp"
 
 MO::Button the_b1(MO::Const::PIN_B1);
 MO::Button the_b2(MO::Const::PIN_B2);
 MO::Eeprom the_eeprom;
+MO::UI     the_ui;
 
 // for MO::Pomodoro it does not matter what UI it uses
 MO::Pomodoro the_pomodoro(&the_ui, &the_b1, &the_b2, &the_eeprom);

@@ -7,9 +7,9 @@ help:
 	@echo "Use variable MODEL to change it, e.g. make release MODEL=nano328"
 	@echo "\033[0m"
 	@echo "Targets:"
-	@echo "debug      - with serial debug + times in seconds instead of minutes"
-	@echo "serial     - as above + serial UI"
-	@echo "release    - ready to use, no debug"
+	@echo "debug      - lcd UI + serial debug + times in seconds instead of minutes"
+	@echo "serial     - serial UI + serial debug + times in seconds instead of minutes"
+	@echo "release    - lcd UI + no debug - ready to use"
 	@echo "clean      - clean compiled stuff"
 	@echo "upload     - call upload"
 	@echo "test       - build and run tests"
@@ -21,12 +21,21 @@ clean-test:
 	@rm -rf build
 
 debug: clean
+	@rm -f src/ui/UI.*
+	@ln -s ../../src-alternative/ui/lcd/UI.hpp src/ui/UI.hpp
+	@ln -s ../../src-alternative/ui/lcd/UI.cpp src/ui/UI.cpp
 	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
 
 serial: clean
-	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG -DUI_SERIAL" __build
+	@rm -f src/ui/UI.*
+	@ln -s ../../src-alternative/ui/serial/UI.hpp src/ui/UI.hpp
+	@ln -s ../../src-alternative/ui/serial/UI.cpp src/ui/UI.cpp
+	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
 
 release: clean
+	@rm -f src/ui/UI.*
+	@ln -s ../../src-alternative/ui/lcd/UI.hpp src/ui/UI.hpp
+	@ln -s ../../src-alternative/ui/lcd/UI.cpp src/ui/UI.cpp
 	@make BUILD_FLAGS="$(FLAGS)" __build
 
 __build:

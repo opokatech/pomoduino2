@@ -20,20 +20,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "UI_Full.hpp"
+#include "UI.hpp"
 #include "Utils.hpp"
 #include "Const.hpp"
 
 namespace MO
 {
-    UI_Full::UI_Full(): the_timer(0), the_beeper(Const::PIN_BEEPER, 1)
+    UI::UI(): the_timer(0), the_beeper(Const::PIN_BEEPER, 1)
     {
 
     }
 
     // -------------------------------------------------------------------------
 
-    void UI_Full::Show_Ready(const State_IF &a_state)
+    void UI::Show_Ready(const State_IF &a_state)
     {
         the_display.Write(0, "P%02u READY    %c%02u",
                           a_state.Get_Current_Period_Minutes(),
@@ -46,7 +46,7 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Full::Show_Running(const State_IF &a_state)
+    void UI::Show_Running(const State_IF &a_state)
     {
         uint8_t pom = a_state.Get_Pomodoros();
         the_display.Write(0, "P%02u %5s    %c%02u",
@@ -66,7 +66,7 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Full::Show_Paused(const State_IF &a_state)
+    void UI::Show_Paused(const State_IF &a_state)
     {
         uint8_t pom = a_state.Get_Pomodoros();
         // alternate those 2 lines
@@ -97,7 +97,7 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Full::Show_Finished(const State_IF &a_state)
+    void UI::Show_Finished(const State_IF &a_state)
     {
         // display pomodoro done while playing beeper
         if (a_state.Is_Pomodoro())
@@ -116,14 +116,14 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Full::Set_Beeper(uint8_t a_val)
+    void UI::Set_Beeper(uint8_t a_val)
     {
         the_beeper.Reset(a_val);
     }
 
     // -------------------------------------------------------------------------
 
-    bool UI_Full::Showing() const
+    bool UI::Showing() const
     {
         // we are done when beeper stoped.
         return the_beeper.Done() == false;
@@ -131,7 +131,7 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Full::Setup()
+    void UI::Setup()
     {
         uint8_t pomodoro[8] =
 		{
@@ -153,7 +153,7 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Full::create_progress(const State_IF &a_state)
+    void UI::create_progress(const State_IF &a_state)
     {
         memset(the_progress, 0, Display::BUF_SIZE);
         uint8_t pos = 0;

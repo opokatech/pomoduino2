@@ -23,12 +23,12 @@ SOFTWARE.
 #include <Arduino.h>
 #include <stdarg.h>
 
-#include "UI_Serial.hpp"
+#include "UI.hpp"
 #include "Utils.hpp"
 
 namespace MO
 {
-    UI_Serial::UI_Serial(): the_timer(0)
+    UI::UI(): the_timer(0)
     {
         memset(the_buf, 0, B_SIZE);
         memset(the_last_buf, 0, B_SIZE);
@@ -36,7 +36,7 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Serial::Show_Ready(const State_IF &a_state)
+    void UI::Show_Ready(const State_IF &a_state)
     {
         write("P%02u READY    #%02u",
                a_state.Get_Current_Period_Minutes(),
@@ -45,7 +45,7 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Serial::Show_Running(const State_IF &a_state)
+    void UI::Show_Running(const State_IF &a_state)
     {
         write("P%02u %5s    #%02u",
                a_state.Get_Current_Period_Minutes(),
@@ -55,7 +55,7 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Serial::Show_Paused(const State_IF &a_state)
+    void UI::Show_Paused(const State_IF &a_state)
     {
         write("P%02u %5s    - PAUSED #%02u",
               a_state.Get_Current_Period_Minutes(),
@@ -65,7 +65,7 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Serial::Show_Finished(const State_IF &a_state)
+    void UI::Show_Finished(const State_IF &a_state)
     {
         // display pomodoro done while playing beeper
         if (a_state.Is_Pomodoro())
@@ -82,28 +82,28 @@ namespace MO
 
     // -------------------------------------------------------------------------
 
-    void UI_Serial::Set_Beeper(byte a_val)
+    void UI::Set_Beeper(byte a_val)
     {
         the_timer = a_val * 10;
     }
 
     // -------------------------------------------------------------------------
 
-    bool UI_Serial::Showing() const
+    bool UI::Showing() const
     {
         return the_timer != 0;
     }
 
     // -------------------------------------------------------------------------
 
-    void UI_Serial::Setup()
+    void UI::Setup()
     {
         Serial.begin(9600);
     }
 
     // -------------------------------------------------------------------------
 
-    void UI_Serial::write(const char *a_format, ...)
+    void UI::write(const char *a_format, ...)
     {
         va_list vl;
         va_start(vl, a_format);

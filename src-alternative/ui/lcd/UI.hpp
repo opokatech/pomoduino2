@@ -20,19 +20,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef __UI_SERIAL_HPP__
-#define __UI_SERIAL_HPP__
+#ifndef __UI_HPP__
+#define __UI_HPP__
 
 #include "UI_IF.hpp"
+#include "Display.hpp"
+#include "Beeper.hpp"
 #include "State_IF.hpp"
 
 namespace MO
 {
-    /// UI using plain text messages on serial console.
-    class UI_Serial: public UI_IF
+    /// UI using LCD display and a beeper.
+    class UI: public UI_IF
     {
         public:
-            UI_Serial();
+            UI();
 
             virtual void Show_Ready(const State_IF &);
             virtual void Show_Running(const State_IF &);
@@ -44,16 +46,20 @@ namespace MO
 
             virtual void Setup();
         private:
-            void write(const char *a_format, ...);
+            /// Fills the string for the bottom line (the progress).
+            void create_progress(const State_IF&);
 
             enum
             {
-                B_SIZE = 64
+                CHAR_POM = 1,       //!< Character for pomodoro.
+                CHAR_SQUARE = 255   //!< Character for filled square.
             };
 
             uint8_t the_timer;
-            char    the_buf[B_SIZE];
-            char    the_last_buf[B_SIZE];
+
+            Beeper  the_beeper;
+            Display the_display;
+            char    the_progress[Display::BUF_SIZE];
     };
 }
 
