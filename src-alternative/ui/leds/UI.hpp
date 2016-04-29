@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef __UI_SERIAL_HPP__
-#define __UI_SERIAL_HPP__
+#ifndef __UI_HPP__
+#define __UI_HPP__
 
 #include "UI_IF.hpp"
 #include "State_IF.hpp"
@@ -45,6 +45,10 @@ namespace MO
 
             virtual void Setup();
         private:
+            void show_all_dark();
+            void show_pom_period(const State_IF &);
+            void show_done_pom(const State_IF &);
+
             enum
             {
                 PIN_L1 = 5,

@@ -39,34 +39,24 @@ namespace MO
     {
         // in ready state indicated what is next, pause for some time
         // and show how many are done TODO
+        the_timer += 1;
 
-        uint8_t period_min = a_state.Get_Current_Period_Minutes();
-        if (period_min == Const::POM_WORK_MIN)
+        if (the_timer >= 10)
         {
-            digitalWrite(PIN_L1, HIGH);
-            digitalWrite(PIN_L2, HIGH);
-            digitalWrite(PIN_L3, HIGH);
-            digitalWrite(PIN_L4, HIGH);
-            digitalWrite(PIN_L5, HIGH);
-        } 
-        else if (period_min == Const::POM_BREAK_SHORT_MIN)
-        {
-            digitalWrite(PIN_L1, HIGH);
-            digitalWrite(PIN_L2, LOW);
-            digitalWrite(PIN_L3, LOW);
-            digitalWrite(PIN_L4, LOW);
-            digitalWrite(PIN_L5, LOW);
+            the_timer = 0;
         }
-        else if (period_min == Const::POM_BREAK_LONG_MIN)
+
+        if (the_timer < 5)
         {
-            digitalWrite(PIN_L1, HIGH);
-            digitalWrite(PIN_L2, HIGH);
-            digitalWrite(PIN_L3, HIGH);
-            digitalWrite(PIN_L4, LOW);
-            digitalWrite(PIN_L5, LOW);
+            show_pom_period(a_state);
         }
-    }     
-          
+        else
+        {
+            show_done_pom(a_state);
+        }
+
+    }
+
     // -------------------------------------------------------------------------
 
     void UI::Show_Running(const State_IF &a_state)
@@ -94,15 +84,11 @@ namespace MO
 
         if (the_timer < 5)
         {
-            Show_Running(a_state);
+            show_pom_period(a_state);
         }
         else
         {
-            digitalWrite(PIN_L1, LOW);
-            digitalWrite(PIN_L2, LOW);
-            digitalWrite(PIN_L3, LOW);
-            digitalWrite(PIN_L4, LOW);
-            digitalWrite(PIN_L5, LOW);
+            show_all_dark();
         }
     }
 
@@ -112,17 +98,13 @@ namespace MO
     {
         if (the_timer % 2)
         {
-            Show_Ready(a_state);
+            show_pom_period(a_state);
         }
         else
         {
-            digitalWrite(PIN_L1, LOW);
-            digitalWrite(PIN_L2, LOW);
-            digitalWrite(PIN_L3, LOW);
-            digitalWrite(PIN_L4, LOW);
-            digitalWrite(PIN_L5, LOW);
+            show_all_dark();
         }
-       
+
         if (the_timer > 0)
             the_timer -= 1;
         the_beeper.Update();
@@ -154,6 +136,62 @@ namespace MO
         pinMode(PIN_L5, OUTPUT);
 
         the_beeper.Setup();
+    }
+
+    // -------------------------------------------------------------------------
+
+    void UI::show_all_dark()
+    {
+        digitalWrite(PIN_L1, LOW);
+        digitalWrite(PIN_L2, LOW);
+        digitalWrite(PIN_L3, LOW);
+        digitalWrite(PIN_L4, LOW);
+        digitalWrite(PIN_L5, LOW);
+    }
+
+    // -------------------------------------------------------------------------
+
+    void UI::show_pom_period(const State_IF &a_state)
+    {
+        uint8_t period_min = a_state.Get_Current_Period_Minutes();
+        if (period_min == Const::POM_WORK_MIN)
+        {
+            digitalWrite(PIN_L1, HIGH);
+            digitalWrite(PIN_L2, HIGH);
+            digitalWrite(PIN_L3, HIGH);
+            digitalWrite(PIN_L4, HIGH);
+            digitalWrite(PIN_L5, HIGH);
+        }
+        else if (period_min == Const::POM_BREAK_SHORT_MIN)
+        {
+            digitalWrite(PIN_L1, HIGH);
+            digitalWrite(PIN_L2, LOW);
+            digitalWrite(PIN_L3, LOW);
+            digitalWrite(PIN_L4, LOW);
+            digitalWrite(PIN_L5, LOW);
+        }
+        else if (period_min == Const::POM_BREAK_LONG_MIN)
+        {
+            digitalWrite(PIN_L1, HIGH);
+            digitalWrite(PIN_L2, HIGH);
+            digitalWrite(PIN_L3, HIGH);
+            digitalWrite(PIN_L4, LOW);
+            digitalWrite(PIN_L5, LOW);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+
+    void UI::show_done_pom(const State_IF &a_state)
+    {
+        uint8_t pom = a_state.Get_Pomodoros();
+
+        digitalWrite(PIN_L1, (pom & B10000) ? HIGH: LOW);
+        digitalWrite(PIN_L2, (pom & B1000)  ? HIGH: LOW);
+        digitalWrite(PIN_L3, (pom & B100)   ? HIGH: LOW);
+        digitalWrite(PIN_L4, (pom & B10)    ? HIGH: LOW);
+        digitalWrite(PIN_L5, (pom & B1)     ? HIGH: LOW);
+
     }
 }
 
