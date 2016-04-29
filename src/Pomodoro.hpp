@@ -64,6 +64,7 @@ namespace MO
             { return the_pom[the_timer_type]->Get_Time_In_Min(); }
             uint32_t Get_Time_Left_Ms() const
             { return the_timer.Get_Time_Left(); }
+            uint32_t Get_Time_Max_Ms() const { return the_timer.Get_Max(); }
             bool Is_Pomodoro() const { return the_timer_type == T_POM25; }
             // </State interface>
         private:

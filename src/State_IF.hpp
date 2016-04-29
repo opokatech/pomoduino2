@@ -38,6 +38,7 @@ namespace MO
             virtual uint8_t  Get_Pomodoros() const = 0;
             virtual uint8_t  Get_Current_Period_Minutes() const = 0;
             virtual uint32_t Get_Time_Left_Ms() const = 0;
+            virtual uint32_t Get_Time_Max_Ms() const = 0;
             virtual bool     Is_Pomodoro() const = 0;
     };
 }
