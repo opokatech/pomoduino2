@@ -62,8 +62,9 @@ The components were connected as depicted below:
 - 16x2 LCD display + 10k potentiometer + 220k resistor (as visible in the
   schematic above) - although the software is made so that the UI class, which
   now uses LCD, can be easily replaced by literally anything. As an example
-  there is UI\_Serial, which spits out something on Serial console depending on
-  current state.
+  there is src-alternative/ui/serial/UI, which spits out something on Serial console depending on
+  current state. Yet another example (included) is a variant using 5 LEDs as
+  "user interface"
 - 2 buttons
 - buzzer - although, again, it can be replaced by any device controller by
   digital output, for example a LED.
