@@ -9,6 +9,7 @@ help:
 	@echo "Targets:"
 	@echo "debug      - lcd UI + serial debug + times in seconds instead of minutes"
 	@echo "serial     - serial UI + serial debug + times in seconds instead of minutes"
+	@echo "leds       - leds UI + serial debug + times in seconds instead of minutes"
 	@echo "release    - lcd UI + no debug - ready to use"
 	@echo "clean      - clean compiled stuff"
 	@echo "upload     - call upload"
@@ -30,6 +31,12 @@ serial: clean
 	@rm -f src/ui/UI.*
 	@ln -s ../../src-alternative/ui/serial/UI.hpp src/ui/UI.hpp
 	@ln -s ../../src-alternative/ui/serial/UI.cpp src/ui/UI.cpp
+	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
+
+leds: clean
+	@rm -f src/ui/UI.*
+	@ln -s ../../src-alternative/ui/leds/UI.hpp src/ui/UI.hpp
+	@ln -s ../../src-alternative/ui/leds/UI.cpp src/ui/UI.cpp
 	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
 
 release: clean
