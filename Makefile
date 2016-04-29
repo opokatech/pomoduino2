@@ -7,27 +7,34 @@ help:
 	@echo "Use variable MODEL to change it, e.g. make release MODEL=nano328"
 	@echo "\033[0m"
 	@echo "Targets:"
-	@echo "debug      - lcd UI + serial debug + times in seconds instead of minutes"
-	@echo "serial     - serial UI + serial debug + times in seconds instead of minutes"
-	@echo "leds       - leds UI + serial debug + times in seconds instead of minutes"
-	@echo "release    - lcd UI + no debug - ready to use"
-	@echo "clean      - clean compiled stuff"
-	@echo "upload     - call upload"
-	@echo "test       - build and run tests"
-	@echo "clean-test - remove build directory with tests"
+	@echo "lcd          - lcd UI + no debug - ready to use"
+	@echo "lcd-debug    - lcd UI + serial debug + times in seconds instead of minutes"
+	@echo "serial-debug - serial UI + serial debug + times in seconds instead of minutes"
+	@echo "leds         - leds UI + serial debug + times in seconds instead of minutes"
+	@echo "leds-debug   - leds UI + serial debug + times in seconds instead of minutes"
+	@echo "clean        - clean compiled stuff"
+	@echo "upload       - call upload"
+	@echo "test         - build and run tests"
+	@echo "clean-test   - remove build directory with tests"
 
 clean:
 	@ino clean
 clean-test:
 	@rm -rf build
 
-debug: clean
+lcd: clean
+	@rm -f src/ui/UI.*
+	@ln -s ../../src-alternative/ui/lcd/UI.hpp src/ui/UI.hpp
+	@ln -s ../../src-alternative/ui/lcd/UI.cpp src/ui/UI.cpp
+	@make BUILD_FLAGS="$(FLAGS)" __build
+
+lcd-debug: clean
 	@rm -f src/ui/UI.*
 	@ln -s ../../src-alternative/ui/lcd/UI.hpp src/ui/UI.hpp
 	@ln -s ../../src-alternative/ui/lcd/UI.cpp src/ui/UI.cpp
 	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
 
-serial: clean
+serial-debug: clean
 	@rm -f src/ui/UI.*
 	@ln -s ../../src-alternative/ui/serial/UI.hpp src/ui/UI.hpp
 	@ln -s ../../src-alternative/ui/serial/UI.cpp src/ui/UI.cpp
@@ -37,13 +44,13 @@ leds: clean
 	@rm -f src/ui/UI.*
 	@ln -s ../../src-alternative/ui/leds/UI.hpp src/ui/UI.hpp
 	@ln -s ../../src-alternative/ui/leds/UI.cpp src/ui/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
-
-release: clean
-	@rm -f src/ui/UI.*
-	@ln -s ../../src-alternative/ui/lcd/UI.hpp src/ui/UI.hpp
-	@ln -s ../../src-alternative/ui/lcd/UI.cpp src/ui/UI.cpp
 	@make BUILD_FLAGS="$(FLAGS)" __build
+
+leds-debug: clean
+	@rm -f src/ui/UI.*
+	@ln -s ../../src-alternative/ui/leds/UI.hpp src/ui/UI.hpp
+	@ln -s ../../src-alternative/ui/leds/UI.cpp src/ui/UI.cpp
+	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
 
 __build:
 	@echo "\033[1;32;40m";
