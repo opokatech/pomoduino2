@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef __UI_SERIAL_HPP__
-#define __UI_SERIAL_HPP__
+#ifndef __UI_HPP__
+#define __UI_HPP__
 
 #include "UI_IF.hpp"
 #include "State_IF.hpp"
