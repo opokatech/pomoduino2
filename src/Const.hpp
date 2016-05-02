@@ -36,12 +36,12 @@ namespace MO
         const uint8_t PIN_LCD_BRIGHTNESS    = 6;  // button brighness up
 
         // display
-        const uint8_t PIN_RS                = 8;
-        const uint8_t PIN_ENABLE            = 9;
-        const uint8_t PIN_D4                = 10;
-        const uint8_t PIN_D5                = 11;
-        const uint8_t PIN_D6                = 12;
-        const uint8_t PIN_D7                = 13;
+        const uint8_t PIN_RS                = 7;
+        const uint8_t PIN_ENABLE            = 8;
+        const uint8_t PIN_D4                = 9;
+        const uint8_t PIN_D5                = 10;
+        const uint8_t PIN_D6                = 11;
+        const uint8_t PIN_D7                = 12;
 
         // pomodoro constants
         const uint8_t POM_WORK_MIN          = 25;

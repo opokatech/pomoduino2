@@ -46,9 +46,14 @@ namespace MO
         // delivers 80/255 duty cycle PWM
         analogWrite(MO::Const::PIN_LCD_BRIGHTNESS, 80);
 
-        // actually for contrast we should deliver real analog signal, but
-        // even this square wave seems to work fine.
-        analogWrite(MO::Const::PIN_LCD_CONTRAST, 155);
+        // for contrast we should deliver real analog signal.
+        // Putting PWM instead may work, but sometimes the result is
+        // flickering. To prevent that some simple RC filter needs to be added.
+        // Alternatively just R will do, however it is a waste of energy.
+        //
+        // If you want try PWM uncomment the line below and replace resistor
+        // with RC (another R in serie and a capacitor parallel).
+        // analogWrite(MO::Const::PIN_LCD_CONTRAST, 128);
     }
 
     // -------------------------------------------------------------------------

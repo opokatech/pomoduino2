@@ -35,6 +35,11 @@ MO::UI     the_ui;
 MO::Pomodoro the_pomodoro(&the_ui, &the_b1, &the_b2, &the_eeprom);
 uint32_t the_time = 0;
 
+#ifdef MO_DEBUG
+uint8_t the_contrast = 128;
+uint8_t the_brightness = 128;
+#endif
+
 void setup()
 {
     the_b1.Setup();
@@ -52,6 +57,29 @@ void loop()
     the_b1.Update(the_time);
     the_b2.Update(the_time);
     the_pomodoro.Run(the_time);
+
+#ifdef MO_DEBUG
+    // for adjusting contrast and brightness
+    if (Serial.available() > 0)
+    {
+        int b = Serial.read();
+
+        if (b == 'c')
+        {
+            the_contrast += 8;
+            analogWrite(MO::Const::PIN_LCD_CONTRAST, the_contrast);
+            Serial.print("contrast: ");
+            Serial.println(the_contrast, DEC);
+        }
+        else if (b == 'b')
+        {
+            the_brightness += 8;
+            analogWrite(MO::Const::PIN_LCD_BRIGHTNESS, the_brightness);
+            Serial.print("brightness: ");
+            Serial.println(the_brightness, DEC);
+        }
+    }
+#endif
 
     delay(100);
 }
