@@ -21,6 +21,7 @@ SOFTWARE.
 */
 
 #include <stdarg.h>
+#include <Arduino.h>
 #include "Display.hpp"
 #include "Const.hpp"
 
@@ -39,6 +40,20 @@ namespace MO
     void Display::Setup()
     {
         the_lcd.begin(MAX_CHARS, MAX_LINES);   // 16x2 format
+        pinMode(MO::Const::PIN_LCD_BRIGHTNESS, OUTPUT); // uses PWM pin
+        pinMode(MO::Const::PIN_LCD_CONTRAST, OUTPUT); // uses PWM pin
+
+        // delivers 80/255 duty cycle PWM
+        analogWrite(MO::Const::PIN_LCD_BRIGHTNESS, 80);
+
+        // for contrast we should deliver real analog signal.
+        // Putting PWM instead may work, but sometimes the result is
+        // flickering. To prevent that some simple RC filter needs to be added.
+        // Alternatively just R will do, however it is a waste of energy.
+        //
+        // If you want try PWM uncomment the line below and replace resistor
+        // with RC (another R in serie and a capacitor parallel).
+        // analogWrite(MO::Const::PIN_LCD_CONTRAST, 128);
     }
 
     // -------------------------------------------------------------------------

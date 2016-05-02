@@ -6,9 +6,13 @@ lcd display, 2 buttons and a buzzer.
 It keeps track of finished pomodoros (saves them to non-volatile memory) and
 counts them up. The logic is described below.
 
-A prototype looks like this:
+A prototype with Arduino looks like this:
 
-![pomoduino2 proto](/doc/images/pomoduino2_proto.jpg?raw=true "Pomoduino2 prototype").
+![pomoduino2 arduino proto](/doc/images/arduino_proto.jpg?raw=true "Pomoduino2 prototype with arduino").
+
+... and using nano - like this:
+
+![pomoduino2 nano proto](/doc/images/nano_proto.jpg?raw=true "Pomoduino2 prototype with nano").
 
 
 # Logic - description
@@ -49,22 +53,30 @@ The drawing was made with [draw.io](https://www.draw.io/).
 
 The components were connected as depicted below:
 
-![sketch of pomoduino2 timer](/doc/images/pomoduino2_sketch_small.png?raw=true "Sketch diagram").
+![sketch of pomoduino2 timer](/doc/images/arduino_sketch_small.png?raw=true "Sketch diagram").
 
 
 # Building
 
 ## Hardware
 
-- [arduino] - I used uno but should work with others too. As you can see it just
-  uses input from 2 buttons and several outputs (LCD, buzzer) so it could be
-  adapted to any device having digital I/Os
-- 16x2 LCD display + 10k potentiometer + 220k resistor (as visible in the
-  schematic above) - although the software is made so that the UI class, which
+- [arduino] - I used uno and nano328 but should work with others too. As you can
+  see it just uses input from 2 buttons and several outputs (LCD, buzzer) so it
+  could be adapted to any device having digital I/Os
+- 16x2 LCD display - although the software is made so that the UI class, which
   now uses LCD, can be easily replaced by literally anything. As an example
-  there is src-alternative/ui/serial/UI, which spits out something on Serial console depending on
-  current state. Yet another example (included) is a variant using 5 LEDs as
-  "user interface"
+  there is src-alternative/ui/serial/UI, which spits out something on Serial
+  console depending on current state. Yet another example (included) is a
+  variant using 5 LEDs as "user interface".
+- 10k potentiometer (optional) - for controlling contrast. If you don't want
+  that just use some resistor placed between V0 pin of the LCD and ground. For
+  me 3.3k Ohm worked well as you can see
+  [here](/doc/images/nano_sketch_big.png).
+  Alternatively you can uncomment a piece of code in Display::Setup which
+  uses pin D5 as PWM for controlling the contrast. It worked well for my on
+  Arduino, but on Nano the display is flickering, so there is really a need for
+  a simple RC filter.
+
 - 2 buttons
 - buzzer - although, again, it can be replaced by any device controller by
   digital output, for example a LED.
