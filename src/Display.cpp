@@ -21,6 +21,7 @@ SOFTWARE.
 */
 
 #include <stdarg.h>
+#include <Arduino.h>
 #include "Display.hpp"
 #include "Const.hpp"
 
@@ -39,6 +40,15 @@ namespace MO
     void Display::Setup()
     {
         the_lcd.begin(MAX_CHARS, MAX_LINES);   // 16x2 format
+        pinMode(MO::Const::PIN_LCD_BRIGHTNESS, OUTPUT); // uses PWM pin
+        pinMode(MO::Const::PIN_LCD_CONTRAST, OUTPUT); // uses PWM pin
+
+        // delivers 80/255 duty cycle PWM
+        analogWrite(MO::Const::PIN_LCD_BRIGHTNESS, 80);
+
+        // actually for contrast we should deliver real analog signal, but
+        // even this square wave seems to work fine.
+        analogWrite(MO::Const::PIN_LCD_CONTRAST, 155);
     }
 
     // -------------------------------------------------------------------------
