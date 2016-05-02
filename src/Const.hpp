@@ -32,8 +32,8 @@ namespace MO
         const uint8_t PIN_BEEPER            = 2;  // beeper
         const uint8_t PIN_B1                = 3;  // button 1
         const uint8_t PIN_B2                = 4;  // button 2
-        const uint8_t PIN_LCD_BRIGHTNESS    = 5;  // button brighness up
-        const uint8_t PIN_LCD_CONTRAST      = 6;  // button contrast
+        const uint8_t PIN_LCD_CONTRAST      = 5;  // button contrast
+        const uint8_t PIN_LCD_BRIGHTNESS    = 6;  // button brighness up
 
         // display
         const uint8_t PIN_RS                = 8;
