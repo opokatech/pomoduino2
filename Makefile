@@ -1,4 +1,3 @@
-FLAGS=-ffunction-sections -fdata-sections -Os -Isrc
 MODEL?=uno
 
 help:
@@ -18,39 +17,40 @@ help:
 	@echo "clean-test   - remove build directory with tests"
 
 clean:
-	@ino clean
+	@BOARD_TAG=$(MODEL) make -C src clean
+
 clean-test:
 	@rm -rf build
 
 lcd: clean
-	@rm -f src/ui/UI.*
-	@ln -s ../../src-alternative/ui/lcd/UI.hpp src/ui/UI.hpp
-	@ln -s ../../src-alternative/ui/lcd/UI.cpp src/ui/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS)" __build
+	@rm -f src/UI.*
+	@ln -s ../src-alternative/ui/lcd/UI.hpp src/UI.hpp
+	@ln -s ../src-alternative/ui/lcd/UI.cpp src/UI.cpp
+	@make __build
 
 lcd-debug: clean
-	@rm -f src/ui/UI.*
-	@ln -s ../../src-alternative/ui/lcd/UI.hpp src/ui/UI.hpp
-	@ln -s ../../src-alternative/ui/lcd/UI.cpp src/ui/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
+	@rm -f src/UI.*
+	@ln -s ../src-alternative/ui/lcd/UI.hpp src/UI.hpp
+	@ln -s ../src-alternative/ui/lcd/UI.cpp src/UI.cpp
+	@make BUILD_FLAGS="-DMO_DEBUG" __build
 
 serial-debug: clean
-	@rm -f src/ui/UI.*
-	@ln -s ../../src-alternative/ui/serial/UI.hpp src/ui/UI.hpp
-	@ln -s ../../src-alternative/ui/serial/UI.cpp src/ui/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
+	@rm -f src/UI.*
+	@ln -s ../src-alternative/ui/serial/UI.hpp src/UI.hpp
+	@ln -s ../src-alternative/ui/serial/UI.cpp src/UI.cpp
+	@make BUILD_FLAGS="-DMO_DEBUG" __build
 
 leds: clean
-	@rm -f src/ui/UI.*
-	@ln -s ../../src-alternative/ui/leds/UI.hpp src/ui/UI.hpp
-	@ln -s ../../src-alternative/ui/leds/UI.cpp src/ui/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS)" __build
+	@rm -f src/UI.*
+	@ln -s ../src-alternative/ui/leds/UI.hpp src/UI.hpp
+	@ln -s ../src-alternative/ui/leds/UI.cpp src/UI.cpp
+	@make __build
 
 leds-debug: clean
-	@rm -f src/ui/UI.*
-	@ln -s ../../src-alternative/ui/leds/UI.hpp src/ui/UI.hpp
-	@ln -s ../../src-alternative/ui/leds/UI.cpp src/ui/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
+	@rm -f src/UI.*
+	@ln -s ../src-alternative/ui/leds/UI.hpp src/UI.hpp
+	@ln -s ../src-alternative/ui/leds/UI.cpp src/UI.cpp
+	@make BUILD_FLAGS="-DMO_DEBUG" __build
 
 __build:
 	@echo "\033[1;32;40m";
@@ -58,14 +58,14 @@ __build:
 	@echo FLAGS=$(BUILD_FLAGS)
 	@echo "\033[0m"
 	@sleep 1
-	ino build -f="$(BUILD_FLAGS)" -m $(MODEL)
+	BOARD_TAG=$(MODEL) BUILD_FLAGS="$(BUILD_FLAGS)" make -C src
 
 upload:
 	@echo "\033[1;32;40m";
 	@echo MODEL=$(MODEL)
 	@echo "\033[0m"
 	@sleep 1
-	ino upload -m $(MODEL)
+	BOARD_TAG=$(MODEL) make -C src upload
 
 test_dir:
 	[ -d build ] || mkdir build
