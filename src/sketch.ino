@@ -24,7 +24,7 @@ SOFTWARE.
 #include "Pomodoro.hpp"
 #include "Button.hpp"
 #include "Eeprom.hpp"
-#include "ui/UI.hpp"
+#include "UI.hpp"
 
 MO::Button the_b1(MO::Const::PIN_B1);
 MO::Button the_b2(MO::Const::PIN_B2);

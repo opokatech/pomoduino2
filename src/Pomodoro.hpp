@@ -29,7 +29,7 @@ SOFTWARE.
 #include "Timer.hpp"
 #include "Period.hpp"
 #include "State_IF.hpp"
-#include "ui/UI_IF.hpp"
+#include "UI_IF.hpp"
 #include "Eeprom_IF.hpp"
 
 namespace MO
