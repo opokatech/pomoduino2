@@ -70,12 +70,9 @@ The components were connected as depicted below:
   variant using 5 LEDs as "user interface".
 - 10k potentiometer (optional) - for controlling contrast. If you don't want
   that just use some resistor placed between V0 pin of the LCD and ground. For
-  me 3.3k Ohm worked well as you can see
-  [here](/doc/images/nano_sketch_big.png).
-  Alternatively you can uncomment a piece of code in Display::Setup which
-  uses pin D5 as PWM for controlling the contrast. It worked well for my on
-  Arduino, but on Nano the display is flickering, so there is really a need for
-  a simple RC filter.
+  me 3.3k Ohm worked well, however using a capacitor (100uF) as you can see here:
+  [here](/doc/images/nano_sketch_big.png) worked best (forming simple RC
+  filter with D5 as PWM).
 
 - 2 buttons
 - buzzer - although, again, it can be replaced by any device controller by
