@@ -26,31 +26,31 @@ lcd: clean
 	@rm -f src/UI.*
 	@ln -s ../src-alternative/ui/lcd/UI.hpp src/UI.hpp
 	@ln -s ../src-alternative/ui/lcd/UI.cpp src/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS)" __build
+	@make __build
 
 lcd-debug: clean
 	@rm -f src/UI.*
 	@ln -s ../src-alternative/ui/lcd/UI.hpp src/UI.hpp
 	@ln -s ../src-alternative/ui/lcd/UI.cpp src/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
+	@make BUILD_FLAGS="-DMO_DEBUG" __build
 
 serial-debug: clean
 	@rm -f src/UI.*
 	@ln -s ../src-alternative/ui/serial/UI.hpp src/UI.hpp
 	@ln -s ../src-alternative/ui/serial/UI.cpp src/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
+	@make BUILD_FLAGS="-DMO_DEBUG" __build
 
 leds: clean
 	@rm -f src/UI.*
 	@ln -s ../src-alternative/ui/leds/UI.hpp src/UI.hpp
 	@ln -s ../src-alternative/ui/leds/UI.cpp src/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS)" __build
+	@make __build
 
 leds-debug: clean
 	@rm -f src/UI.*
 	@ln -s ../src-alternative/ui/leds/UI.hpp src/UI.hpp
 	@ln -s ../src-alternative/ui/leds/UI.cpp src/UI.cpp
-	@make BUILD_FLAGS="$(FLAGS) -DMO_DEBUG" __build
+	@make BUILD_FLAGS="-DMO_DEBUG" __build
 
 __build:
 	@echo "\033[1;32;40m";
@@ -58,7 +58,7 @@ __build:
 	@echo FLAGS=$(BUILD_FLAGS)
 	@echo "\033[0m"
 	@sleep 1
-	BOARD_TAG=$(MODEL) make -C src
+	BOARD_TAG=$(MODEL) BUILD_FLAGS="$(BUILD_FLAGS)" make -C src
 
 upload:
 	@echo "\033[1;32;40m";
