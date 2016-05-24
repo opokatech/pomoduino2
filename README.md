@@ -86,14 +86,12 @@ The components were connected as depicted below:
 
 I'm using [debian] so I could do just this:
 ```sh
-$ apt-get install arduino virtualenvwrapper cmake g++
-$ mkvirtualenv pomodoro2
-$ pip install ino
+$ apt-get install arduino arduino-mk cmake g++
 ```
 
 Then in the directory where this repository was cloned:
 ```sh
-$ make release # to build a ready to use version
+$ make lcd # to build a ready to use version
 $ make upload # to upload compiled binary to the arduino
 ```
 
@@ -103,13 +101,13 @@ If you want to play a bit with it there are few more commands, like:
 $ git submodules update --init # to fetch google tests/mock
 $ make test # to compile and run tests
 
-$ make debug # to build a debug version (see below)
-$ make serial # to build a debug version with UI_Serial instead of UI_Full
+$ make lcd-debug # to build a debug version (see below)
+$ make serial-debug # to build a debug version with UI_Serial instead of UI_Full
 ```
 
 ### Some explanations
 
-To compile I used [ino]. I really recommend that as an alternative to the
+To compile I used arduino-mk. I really recommend that as an alternative to the
 official IDE - especially if you would like to:
 - use your favourite text editor,
 - be able to easily adjust compile options
@@ -119,7 +117,7 @@ That code is very likely to work using the standard [arduino] IDE, provided that
 the files are put in right directories. But I neither tested that nor plan to.
 
 The `debug` target adds some extra debug messages which are spit out on serial
-interface (with `ino serial` you can watch it) AND it changes times of pomodoro
+interface (with `picocom /dev/ttyUSB0` you can watch it) AND it changes times of pomodoro
 periods from minutes to seconds which is very useful for testing.
 
 For testing the code I used [google test] which also includes google mock. I
@@ -137,6 +135,5 @@ Documentation was tested using [dillinger.io](http://dillinger.io/).
 
 [arduino]: <https://www.arduino.cc/>
 [debian]: <https://www.debian.org/>
-[ino]: <http://inotool.org/>.
 [googletest]: <https://github.com/google/googletest>
 [pomodoro]: <https://en.wikipedia.org/wiki/Pomodoro_Technique>
